@@ -1,0 +1,51 @@
+.App{
+  text-align: center;
+}
+.App-header{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px +2vmin);
+  
+}
+.PhoneInputCountry{
+  padding-left: 0 !important;
+}
+.MuiButton-containedSecondary{
+  background-color: grey !important;
+}
+.PhoneInputInput
+{
+  
+  height: 6ch !important;
+}
+.PhoneInput{
+  width: 38ch !important;
+}
+.MuiOutlinedInput-input{
+  width:34ch !important;
+}
+.MuiSelect-select.MuiSelect-select{
+  width:32ch !important;
+}
+.MuiButton-containedPrimary{
+  background-color:orangered !important;
+  width: 36ch !important;
+}
+.Textfield{
+  color:orangered !important;
+}
+
+.MuiPaper-root{
+  background-color: #003366 !important;
+}
+.MuiStepIcon-root.MuiStepIcon-active{
+  color: #FF4500 !important;
+}
+.MuiStepLabel-label.MuiStepLabel-active{
+  color: white !important;
+}
+.center-Stepper{
+  display: flex;
+  justify-content: center;
+}
