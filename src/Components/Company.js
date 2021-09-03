@@ -85,7 +85,10 @@ const Company = () => {
   return (
     <div>
         <div>
+        <FormControl variant="outlined" >
+
         <Fileupload/>
+        </FormControl>
         </div>
         <br/>
         <br/>

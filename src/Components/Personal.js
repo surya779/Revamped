@@ -230,7 +230,7 @@ formik.values.phonenumber=event;
     
         <br/>
         <br/>
-        <FormControl >
+        <FormControl variant="outlined" className={classes.formControl}>
         <PhoneInput
       placeholder="Enter phone number"
       value={value}
