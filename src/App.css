@@ -14,6 +14,65 @@
 .MuiButton-containedSecondary{
   background-color: grey !important;
 }
+*{
+  margin:0;
+  padding:0;
+
+}
+.page{
+  height:100vh;
+  background-color: #512da8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container{
+  height: 300px;
+  width: 300px;
+  border-radius: 10px;
+  background-color: white;
+
+}
+.heading{
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 1rem;
+  font-weight: bold;
+
+}
+#input[type="file"]{
+  display: none;
+}
+.label{
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+
+}
+
+.image-upload{
+  margin:auto;
+  width: 150px;
+  height:50px;
+background-color: ;
+color:orangered;
+border-radius: 10px;
+text-align: center;
+cursor: pointer;}
+.img-holder{
+  width: 150px;
+  margin: auto;
+  height: 150px;
+  border: 3px solid;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+.img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
 .PhoneInputInput
 {
   width: 27ch !important;

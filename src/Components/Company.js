@@ -12,6 +12,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Fileupload from './Fileupload';
 
 
 const MySelect = ({ label, ...props }) => {
@@ -83,8 +84,11 @@ const Company = () => {
 
   return (
     <div>
-        
-
+        <div>
+        <Fileupload/>
+        </div>
+        <br/>
+        <br/>
         <form onSubmit={formik.handleSubmit}>
         <TextField
         id="companyname"

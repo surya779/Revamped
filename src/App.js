@@ -5,6 +5,7 @@ import React,{Component,useContext} from 'react';
 import { multiStepContext } from './Components/Context';
 import Personal from './Components/Personal'
 import Company from './Components/Company'
+import FileUploadComponent from './Components/Fileupload';
 function App() {
   const{currentStep,finalData}=useContext(multiStepContext);
   function showStep(step){

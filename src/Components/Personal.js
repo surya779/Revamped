@@ -81,14 +81,14 @@ const Personal = () => {
     name: '',
   });
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
+  // const handleChange = (event) => {
+  //   event.preventDefault();
+  //   const name = event.target.name;
+  //   setState({
+  //     ...state,
+  //     [name]: event.target.value,
+  //   });
+  // };
   const [value, setValue] = useState();
  
 const handlephonenumber=(event)=>{
