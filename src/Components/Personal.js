@@ -76,7 +76,7 @@ const Personal = () => {
   acceptedTerms:''}];
 
  
-  const [value, setValue] = useState(data[0].phonenumber);
+  const [value, setValue] = useState('');
  
 const handlephonenumber=(event)=>{
 formik.values.phonenumber=event;
