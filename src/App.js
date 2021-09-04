@@ -8,7 +8,9 @@ import Company from './Components/Company'
 import FileUploadComponent from './Components/Fileupload';
 function App() {
   const{currentStep,finalData}=useContext(multiStepContext);
-  
+  useEffect(()=>{
+
+  },[]}
 
   useEffect(() => {
     // localStorage.removeItem("personalForm")
