@@ -34,22 +34,22 @@ const validationSchema = yup.object({
   fullname:yup 
   
     .string('Enter Your fullname') 
-    .required('Required')
+    .required('Fullname is Required')
     .min(3,'Must contain more than 3 characters')
     .max(15, 'Must be 15 characters or less'),
 
    gender:yup
    .string('Enter Your Gender')
-   .required('Required'),
+   .required('Gender is Required'),
    country:yup
    .string('Choose your Country')
-   .required('Required'),
+   .required('Country is Required'),
    state:yup
    .string('Choose your State')
-   .required('Required'),
+   .required('State is Required'),
    phonenumber:yup
    .string('Choose your phonenumber')
-   .required('Required'),
+   .required('Phone Number is Required'),
   
   
 

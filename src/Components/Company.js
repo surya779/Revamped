@@ -32,20 +32,20 @@ const MySelect = ({ label, ...props }) => {
 const validationSchema = yup.object({
   companyname:yup 
     .string('Enter Your Company Detail')
-    .required('required'),
+    .required('Company Detail is required'),
   jobtitle:yup 
     .string('Enter Your Job Title')
-    .required('required'),
+    .required('Job title is required'),
   yoe:yup 
     .number('Enter Your Year of Experience')
-    .required('required'),
+    .required('Year of Experience is required'),
   email: yup
     .string('Enter your email')
     .email('Enter a valid email')
     .required('Email is required'),
    acceptedTerms: yup
           .boolean()
-          .required('Required')
+          .required('Checkbox Required')
           .oneOf([true], 'You must accept the terms and conditions.'),
   
 });

@@ -23,7 +23,7 @@ function App() {
     yoe:'null',
     acceptedTerms:'null'}];
     localStorage.setItem("formdata",JSON.stringify(formdata))
-  console.log("App loaded ")
+  
   },[])
   function showStep(step){
     switch(step){
