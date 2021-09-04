@@ -18,7 +18,15 @@ const useStyles = makeStyles((theme) => ({
   
   
   }));
+   
 
+  const handlechange=(e, id)=>{
+    // console.log(e);
+    // console.log(e.target.value, id);
+    if (e.target.value.length === 1) {
+      document.getElementById(id).focus();
+    }
+  }
   
 export default function Emailverification() {
     const classes = useStyles();
@@ -33,15 +41,15 @@ export default function Emailverification() {
                        code to name@domain.com. Please enter it below</p>
                        <br/>
 
-                       <TextField className={classes.otp}  id="outlined-basic"  size="small" variant="outlined" /> 
+                       <TextField className={classes.otp}  onChange={(e) => handlechange(e, 'box2')} id="box1"  size="small" variant="outlined" /> 
        
-                       <TextField className={classes.otp}  id="outlined-basic"  size="small" variant="outlined" />
+                       <TextField className={classes.otp} onChange={(e) => handlechange(e, 'box3')} id="box2"  size="small" variant="outlined" />
 
-                       <TextField className={classes.otp}  id="outlined-basic"  size="small" variant="outlined" />
+                       <TextField className={classes.otp} onChange={(e) => handlechange(e, 'box4')}  id="box3"  size="small" variant="outlined" />
 
-                       <TextField className={classes.otp}  id="outlined-basic"  size="small" variant="outlined" />
+                       <TextField className={classes.otp} onChange={(e) => handlechange(e, 'box5')} id="box4"  size="small" variant="outlined" />
 
-                       <TextField className={classes.otp}  id="outlined-basic"  size="small" variant="outlined" />
+                       <TextField className={classes.otp} onChange={(e) => handlechange(e, 'box5')} id="box5"  size="small" variant="outlined" />
 
         </div><br/>
             <div>

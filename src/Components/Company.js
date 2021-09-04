@@ -51,17 +51,18 @@ const validationSchema = yup.object({
 });
 
 const Company = () => {
+  var data = JSON.parse(localStorage.getItem('formdata'))
   const {setStep,userData,setUserData}=useContext(multiStepContext);
 
   const formik = useFormik({
     initialValues: {
-     
-      companyname:'',
-      email: '',
-      jobtitle:'',
+           
+      companyname:data[0].companyname,
+      email: data[0].email,
+      jobtitle:data[0].jobtitle,
      // added for our select
-      yoe:'',
-      acceptedTerms: false, // added for our checkbox
+      yoe:data[0].yoe,
+      acceptedTerms: data[0].acceptedTerms, // added for our checkbox
 
       
     },
