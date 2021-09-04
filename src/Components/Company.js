@@ -14,86 +14,74 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Fileupload from './Fileupload';
 
-
-const MySelect = ({ label, ...props }) => {
-  const [field, meta] = useField(props);
-  return (
-    <div>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <select {...field} {...props} />
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </div>
-  );
-};
-
-
+//validation using yup in React
 const validationSchema = yup.object({
   companyname:yup 
-    .string('Enter Your Company Detail')
-    .required('Company Detail is required'),
+  .string('Enter Your Company Detail')
+  .required('Company Detail is required'),
   jobtitle:yup 
-    .string('Enter Your Job Title')
-    .required('Job title is required'),
+  .string('Enter Your Job Title')
+  .required('Job title is required'),
   yoe:yup 
-    .number('Enter Your Year of Experience')
-    .required('Year of Experience is required'),
+  .number('Enter Your Year of Experience')
+  .required('Year of Experience is required'),
   email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
+  .string('Enter your email')
+  .email('Enter a valid email')
+  .required('Email is required'),
    acceptedTerms: yup
-          .boolean()
-          .required('Checkbox Required')
-          .oneOf([true], 'You must accept the terms and conditions.'),
-  
+  .boolean()
+  .required('Checkbox Required')
+  .oneOf([true], 'You must accept the terms and conditions.'),
 });
 
-const Company = () => {
-  var data = JSON.parse(localStorage.getItem('formdata'))
+//props passed from parent(App.js)
+const Company = (props) => {
+  
+  //data from props
+  var data=props.data
   const {setStep,userData,setUserData}=useContext(multiStepContext);
 
+  //for formik value initialization
   const formik = useFormik({
     initialValues: {
-           
       companyname:data[0].companyname,
       email: data[0].email,
-      jobtitle:data[0].jobtitle,
-     // added for our select
+      jobtitle:data[0].jobtitle,  
       yoe:data[0].yoe,
-      acceptedTerms: data[0].acceptedTerms, // added for our checkbox
-
-      
+      acceptedTerms: data[0].acceptedTerms,  
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log('submit:',values)
-      // alert(JSON.stringify(values, null, 2));
-      // console.log(2)
-      var formdata=localStorage.getItem("formdata");
-    formdata=JSON.parse(formdata);
-    for (var i in values){
-      formdata[0][i]=values[i]
+      //updating object keys in data using for in operator
+      for (var i in values){
+        data[0][i]=values[i]
+      }
+    
+      //updating function in parent - passing data from child to parent via props
+      props.update(data)
 
-    }
-    console.log(formdata);
-    localStorage.setItem("formdata",JSON.stringify(formdata));
+      //processing to step 2
       setStep(3);
     },
   });
 
   return (
     <div>
-        <div>
+        
+      <div>
+        {/*form */}
         <FormControl variant="outlined" >
-
+        {/*fileupload component for image*/}
         <Fileupload/>
         </FormControl>
-        </div>
-        <br/>
-        <br/>
-        <form onSubmit={formik.handleSubmit}>
+      </div>
+      <br/>
+      <br/>
+
+      {/*form */}
+      <form onSubmit={formik.handleSubmit}>
+        {/*text field for company name */} 
         <TextField
         id="companyname"
         name="companyname"
@@ -104,65 +92,66 @@ const Company = () => {
         onChange={formik.handleChange}
         error={formik.touched.companyname && Boolean(formik.errors.companyname)}
         helperText={formik.touched.companyname && formik.errors.companyname}
-
-
         />
         <br/>
         <br/>
+
+        {/*text field for email */} 
         <TextField
-          
-          id="email"
+        id="email"
         name="email"
-          label="Email Id"
-          variant="outlined"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
+        label="Email Id"
+        variant="outlined"
+        value={formik.values.email}
+        onChange={formik.handleChange}
+        error={formik.touched.email && Boolean(formik.errors.email)}
+        helperText={formik.touched.email && formik.errors.email}
         />
-          <br/>
-          <br/>
-          <TextField
-          
-          id="jobtitle"
-        name="jobtitle"
-          label="Job Title"
-          variant="outlined"
-          value={formik.values.jobtitle}
-          onChange={formik.handleChange}
-          error={formik.touched.jobtitle && Boolean(formik.errors.jobtitle)}
-          helperText={formik.touched.jobtitle && formik.errors.jobtitle}
-        />
-          <br/>
-          <br/>
-         
-        <TextField
-          
-          id="yoe"
-          name="yoe"
-          label="Year of Experience"
-          variant="outlined"
-          value={formik.values.yoe}
-          onChange={formik.handleChange}
-          error={formik.touched.yoe && Boolean(formik.errors.yoe)}
-          helperText={formik.touched.yoe && formik.errors.yoe}
-        />
-         
-          
-   <br/>
-   <br/>
-  
-   <FormControlLabel control={<Checkbox name="acceptedTerms" />}  label="I accept the terms and conditions"
-   value={formik.values.acceptedTerms}
-   onChange={formik.handleChange}
-   error={formik.touched.acceptedTerms && Boolean(formik.errors.acceptedTerms)}
-   helperText={formik.touched.acceptedTerms && formik.errors.acceptedTerms} />
+        <br/>
+        <br/>
 
-<br/>
-<br/>
-           <Button variant="contained" onClick={()=>setStep(1)} color="Secondary">Back</Button>
-           <span> </span>
-           <Button color="primary"  variant="contained" fullWidth type="submit">
+        {/*text field for company jobtitle */} 
+        <TextField
+        id="jobtitle"
+        name="jobtitle"
+        label="Job Title"
+        variant="outlined"
+        value={formik.values.jobtitle}
+        onChange={formik.handleChange}
+        error={formik.touched.jobtitle && Boolean(formik.errors.jobtitle)}
+        helperText={formik.touched.jobtitle && formik.errors.jobtitle}
+        />
+        <br/>
+        <br/>
+         
+        {/*text field for yours of experience */} 
+        <TextField
+        id="yoe"
+        name="yoe"
+        label="Year of Experience"
+        variant="outlined"
+        value={formik.values.yoe}
+        onChange={formik.handleChange}
+        error={formik.touched.yoe && Boolean(formik.errors.yoe)}
+        helperText={formik.touched.yoe && formik.errors.yoe}
+        />      
+        <br/>
+        <br/>
+
+        {/*checkbox for accept the terms and conditions*/} 
+        <FormControlLabel control={<Checkbox name="acceptedTerms" />}  label="I accept the terms and conditions"
+        value={formik.values.acceptedTerms}
+        onChange={formik.handleChange}
+        error={formik.touched.acceptedTerms && Boolean(formik.errors.acceptedTerms)}
+        helperText={formik.touched.acceptedTerms && formik.errors.acceptedTerms} />   
+        <br/>
+        <br/>
+
+        {/*back button */} 
+        <Button variant="contained" onClick={()=>setStep(1)} color="Secondary">Back</Button>
+          <span> </span>
+          {/*send otp button */} 
+          <Button color="primary"  variant="contained" fullWidth type="submit">
           Send OTP
         </Button>
         </form>

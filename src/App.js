@@ -10,37 +10,37 @@ import FileUploadComponent from './Components/Fileupload';
 
 function App() {
   const{currentStep,finalData}=useContext(multiStepContext);
+  //setting the state for form data
   const[formdata, setformdata]=useState([{fullname:'',
-  gender:'null',
-  state:'null',
-  country:'null',
-  phonenumber:'null',
-  companyname:'null',
-  email:'null',
-  jobtitle:'null',
-  yoe:'null',
-  acceptedTerms:'null'}])
+  gender:'',
+  state:'',
+  country:'',
+  phonenumber:'',
+  companyname:'',
+  email:'',
+  jobtitle:'',
+  yoe:'',
+  acceptedTerms:''}])
   
+  //updating the form data and storing it to the local storage
   const updateformdata=(data)=>{
-    console.log(data)
+    //updating the state of "form data" using the "setformdata" function
     setformdata(data)
+    localStorage.setItem("formdata",JSON.stringify(data))
   }
 
-
-  // useEffect(() => {
-  //   // localStorage.removeItem("personalForm")
-  //   const formdata = 
-  //   data=formdata
-  //   localStorage.setItem("formdata",JSON.stringify(formdata))
-  
-  // },[])
   function showStep(step){
     switch(step){
       case 1:
-      return <Personal data={formdata} update={updateformdata}/>
+        //Personal - child component
+        //passing the data prop and update prop (for child to parent communication )  
+        return <Personal data={formdata} update={updateformdata}/>
       case 2:
-        return <Company/>
+        //Company - child component
+        //passing the data prop and update prop (for child to parent communication ) 
+        return <Company data={formdata} update={updateformdata}/>
       case 3:
+        //Emailverification - child component
         return <Emailverification/>
         
     }
@@ -50,20 +50,23 @@ function App() {
       <header className="App-header">
       <div className="center-stepper" >
         
-        <Stepper  activeStep={currentStep-1} orientation="horizontal">
-      <Step>
-        <StepLabel>Personal details</StepLabel>
-      </Step>
-      <Step>
-        <StepLabel>Company details</StepLabel>
-      </Step>
-      <Step>
-        <StepLabel>Email Verification</StepLabel>
-      </Step>
+      {/*form stepper - one way of implementation without the use of material ui's stepper*/}
+      <Stepper  activeStep={currentStep-1} orientation="horizontal">
+        <Step>
+          <StepLabel>Personal details</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Company details</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Email Verification</StepLabel>
+        </Step>
       </Stepper>
       <br/>
       
       </div>
+
+      {/*passing the current step - for proceeding form steps via switch case*/}
       {showStep(currentStep)}
       
       

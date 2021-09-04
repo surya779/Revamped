@@ -12,13 +12,6 @@ import Select from '@material-ui/core/Select';
 import 'react-phone-number-input/style.css'
 import PhoneInput, { formatPhoneNumber, formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input'
 
-function countryToFlag(isoCode) {
-  return typeof String.fromCodePoint !== 'undefined'
-    ? isoCode
-        .toUpperCase()
-        .replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
-    : isoCode;
-}
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -29,14 +22,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
+//validation using yup in React
 const validationSchema = yup.object({
   fullname:yup 
-  
-    .string('Enter Your fullname') 
-    .required('Fullname is Required')
-    .min(3,'Must contain more than 3 characters')
-    .max(15, 'Must be 15 characters or less'),
+  .string('Enter Your fullname') 
+  .required('Fullname is Required')
+  .min(3,'Must contain more than 3 characters')
+  .max(15, 'Must be 15 characters or less'),
 
    gender:yup
    .string('Enter Your Gender')
@@ -49,90 +41,72 @@ const validationSchema = yup.object({
    .required('State is Required'),
    phonenumber:yup
    .string('Choose your phonenumber')
-   .required('Phone Number is Required'),
-  
-  
-
-  
+   .required('Phone Number is Required'), 
 });
 
-
+//props passed from parent(App.js)
 const Personal = (props) => {
-  // console.log(props)
-  // var data = JSON.parse(localStorage.getItem('formdata'))
-    var data=props.data
-    console.log(data)
-  
+
+  //data from props
+  var data=props.data
+
   const classes = useStyles();
 
   const {setStep}=useContext(multiStepContext);
-  const formdata = [{fullname:'',
-  gender:'',
-  state:'',
-  country:'',
-  phonenumber:'',
-  companyname:'',
-  email:'',
-  jobtitle:'',
-  yoe:'',
-  acceptedTerms:''}];
-
- 
+  
   const [value, setValue] = useState(data[0].phonenumber);
  
+//for setting phone number input value  
 const handlephonenumber=(event)=>{
 formik.values.phonenumber=event;
 }
-  const formik = useFormik({
-    
-    initialValues: {
-     
-      fullname:data[0].fullname,
-      gender:data[0].gender,
-      country:data[0].country,
-      state:data[0].state,
-      phonenumber:data[0].phonenumber,
 
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-    
-      for(var i in values ){
-        console.log(i);
-        formdata[0][i]=values[i];
-        
-      }
-      console.log(formdata);
-      props.update(formdata)
-      // alert(JSON.stringify(values, null, 2));
-      // console.log(2)
-      localStorage.setItem("formdata",JSON.stringify(formdata))
-
-      setStep(2);
+//for formik value initialization
+const formik = useFormik({
+  
+  initialValues: {
+    fullname:data[0].fullname,
+    gender:data[0].gender,
+    country:data[0].country,
+    state:data[0].state,
+    phonenumber:data[0].phonenumber,
+  },
+  validationSchema: validationSchema,
+  onSubmit: (values) => {
+  
+    //updating object keys in data using for in operator
+    for(var i in values ){
+      data[0][i]=values[i];
     }
-  });
+  
+    //updating function in parent - passing data from child to parent via props
+    props.update(data)
+    
+    //processing to step 2
+    setStep(2);
+  }
+});
   
   return (
     <div>
-        
-
-        <form  onSubmit={(event) => formik.handleSubmit(event)}>
-        <TextField
-        id="fullname"
-        name="fullname"
-        label="Full Name"
-        variant="outlined"
-        autoComplete="off"
-        value={formik.values.fullname}
-        
-        onChange={formik.handleChange}
-        error={formik.touched.fullname && Boolean(formik.errors.fullname)}
-        helperText={formik.touched.fullname && formik.errors.fullname}
-
-
-        />
-        <br/>
-        <br/>
+      {/*form */}  
+      <form  onSubmit={(event) => formik.handleSubmit(event)}>
+      {/*text field for full name */}  
+      <TextField
+      id="fullname"
+      name="fullname"
+      label="Full Name"
+      variant="outlined"
+      autoComplete="off"
+      value={formik.values.fullname}
+      
+      onChange={formik.handleChange}
+      error={formik.touched.fullname && Boolean(formik.errors.fullname)}
+      helperText={formik.touched.fullname && formik.errors.fullname}
+      />
+      <br/>
+      <br/>
+      {/*select dropdown for gender */}  
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel htmlFor="outlined-gender-native-simple">Gender</InputLabel>
         <Select 
@@ -150,16 +124,12 @@ formik.values.phonenumber=event;
           <option aria-label="None" value="" />
           <option value="male">Male</option>
           <option value="female">Female</option>
-
-        
         </Select>
-        
       </FormControl>
       <br/>
       <br/>
-     
-
-<FormControl variant="outlined" className={classes.formControl}>
+      {/*select for country*/}  
+      <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel htmlFor="outlined-gender-native-simple">Country</InputLabel>
         <Select 
           native
@@ -183,17 +153,12 @@ formik.values.phonenumber=event;
           <option value="latvia">Latvia</option>
           <option value="maldives">Maldives</option>
           <option value="ukraine">Ukraine</option>
-
-
-          
-
-        
         </Select>
-      </FormControl>
-
-<br/>
-<br/>
-<FormControl variant="outlined" className={classes.formControl}>
+      </FormControl>    
+      <br/>
+      <br/>
+      {/*text field for full name */}  
+      <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel htmlFor="outlined-gender-native-simple">State</InputLabel>
         <Select 
           native
@@ -214,40 +179,29 @@ formik.values.phonenumber=event;
           <option value="gujarat">Gujarat</option>
           <option value="westbengal">West Bengal</option>
           <option value="madhyapradesh">Madhya Pradesh</option>
-
-
-
-        
         </Select>
       </FormControl>
-     
-    
-        <br/>
-        <br/>
-        <FormControl variant="outlined" className={classes.formControl}>
+      <br/>
+      <br/>
+      {/*input for phone number */}  
+      <FormControl variant="outlined" className={classes.formControl}>
         <PhoneInput
-      placeholder="Enter phone number"
-      value={value}
-      onChange={handlephonenumber}
-      error={formik.touched.phonenumber && Boolean(formik.errors.phonenumber)}
-      helperText={formik.touched.phonenumber && formik.errors.phonenumber}
-
+          placeholder="Enter phone number"
+          value={value}
+          onChange={handlephonenumber}
+          error={formik.touched.phonenumber && Boolean(formik.errors.phonenumber)}
+          helperText={formik.touched.phonenumber && formik.errors.phonenumber}
        />
        </FormControl>
-      <br/>
-      <br/>
-          {/* <Select 
-          name="country"
-          label="Country"
-          option={countries}/> */}
-           
-           <Button color="primary"  variant="contained" fullWidth type="submit">
+        <br/>
+        <br/>
+        {/*next button */}  
+        <Button color="primary"  variant="contained" fullWidth type="submit">
           Next
         </Button>
         </form>
     </div>
   );
 };
-
 
 export default Personal;
