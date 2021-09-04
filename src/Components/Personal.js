@@ -57,9 +57,11 @@ const validationSchema = yup.object({
 });
 
 
-const Personal = () => {
-  var data = JSON.parse(localStorage.getItem('formdata'))
-    
+const Personal = (props) => {
+  // console.log(props)
+  // var data = JSON.parse(localStorage.getItem('formdata'))
+    var data=props.data
+    console.log(data)
   
   const classes = useStyles();
 
@@ -76,7 +78,7 @@ const Personal = () => {
   acceptedTerms:''}];
 
  
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(data[0].phonenumber);
  
 const handlephonenumber=(event)=>{
 formik.values.phonenumber=event;
@@ -101,6 +103,7 @@ formik.values.phonenumber=event;
         
       }
       console.log(formdata);
+      props.update(formdata)
       // alert(JSON.stringify(values, null, 2));
       // console.log(2)
       localStorage.setItem("formdata",JSON.stringify(formdata))
