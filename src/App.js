@@ -20,7 +20,7 @@ function App() {
   email:'',
   jobtitle:'',
   yoe:'',
-  acceptedTerms:''}])
+  }])
   
   //updating the form data and storing it to the local storage
   const updateformdata=(data)=>{

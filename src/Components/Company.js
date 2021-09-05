@@ -49,7 +49,7 @@ const Company = (props) => {
       email: data[0].email,
       jobtitle:data[0].jobtitle,  
       yoe:data[0].yoe,
-      acceptedTerms: data[0].acceptedTerms,  
+      acceptedTerms: '',  
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -70,6 +70,8 @@ const Company = (props) => {
     <div>
         
       <div>
+      <h1>Add your company details</h1>
+      <br/>
         {/*form */}
         <FormControl variant="outlined" >
         {/*fileupload component for image*/}
@@ -139,11 +141,12 @@ const Company = (props) => {
         <br/>
 
         {/*checkbox for accept the terms and conditions*/} 
-        <FormControlLabel control={<Checkbox name="acceptedTerms" />}  label="I accept the terms and conditions"
+        <FormControlLabel control={<Checkbox name="acceptedTerms" />}  
         value={formik.values.acceptedTerms}
         onChange={formik.handleChange}
         error={formik.touched.acceptedTerms && Boolean(formik.errors.acceptedTerms)}
-        helperText={formik.touched.acceptedTerms && formik.errors.acceptedTerms} />   
+        helperText={formik.touched.acceptedTerms && formik.errors.acceptedTerms} />  
+        I accept the <span style={{color:'orangered'}}><b> Terms and Conditions </b></span>
         <br/>
         <br/>
 

@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 export default class Fileupload extends Component {
     
     //default image url 
-    state={profileImg:"./download.jpg"}
+    state={profileImg:"./images.png"}
     
     //updating default image url with the image upload
     imageHandler =(e)=>{

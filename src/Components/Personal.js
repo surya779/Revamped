@@ -1,6 +1,6 @@
 import React, {useContext,useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import { ErrorMessage, Formik, useField,useFormik } from 'formik';
+import { Formik, useField,useFormik } from 'formik';
 import * as yup from 'yup';
 import { makeStyles } from '@material-ui/core/styles';
 import { multiStepContext } from './Context';
@@ -32,6 +32,7 @@ const validationSchema = yup.object({
 
    gender:yup
    .string('Enter Your Gender')
+   .ensure()
    .required('Gender is Required'),
    country:yup
    .string('Choose your Country')
@@ -41,6 +42,7 @@ const validationSchema = yup.object({
    .required('State is Required'),
    phonenumber:yup
    .string('Choose your phonenumber')
+   .min(13,'Must contain more than 10 Numbers')
    .required('Phone Number is Required'), 
 });
 
@@ -89,6 +91,9 @@ const formik = useFormik({
   
   return (
     <div>
+      <h1>Add your personal details</h1>
+      <br/>
+      <br/>
       {/*form */}  
       <form  onSubmit={(event) => formik.handleSubmit(event)}>
       {/*text field for full name */}  
@@ -99,7 +104,6 @@ const formik = useFormik({
       variant="outlined"
       autoComplete="off"
       value={formik.values.fullname}
-      
       onChange={formik.handleChange}
       error={formik.touched.fullname && Boolean(formik.errors.fullname)}
       helperText={formik.touched.fullname && formik.errors.fullname}
@@ -118,13 +122,12 @@ const formik = useFormik({
             name: 'gender',
           }}
           error={formik.touched.gender && Boolean(formik.errors.gender)}
-          helperText={formik.touched.gender && formik.errors.gender}
-  
         >
           <option aria-label="None" value="" />
           <option value="male">Male</option>
           <option value="female">Female</option>
         </Select>
+        <span style={{textAlign:'start', color:'#f44336',fontWeight:'400',fontFamily:'"Roboto", "Helvetica", "Arial", sans-serif',letterSpacing:'0.03333em',fontSize:'0.75rem', marginLeft:'4%',marginTop:'3px' }}>{formik.touched.gender && formik.errors.gender}</span>
       </FormControl>
       <br/>
       <br/>
@@ -154,6 +157,7 @@ const formik = useFormik({
           <option value="maldives">Maldives</option>
           <option value="ukraine">Ukraine</option>
         </Select>
+        <span style={{textAlign:'start', color:'#f44336',fontWeight:'400',fontFamily:'"Roboto", "Helvetica", "Arial", sans-serif',letterSpacing:'0.03333em',fontSize:'0.75rem', marginLeft:'4%',marginTop:'3px' }}>{formik.touched.country && formik.errors.country}</span>
       </FormControl>    
       <br/>
       <br/>
@@ -180,6 +184,7 @@ const formik = useFormik({
           <option value="westbengal">West Bengal</option>
           <option value="madhyapradesh">Madhya Pradesh</option>
         </Select>
+        <span style={{textAlign:'start', color:'#f44336',fontWeight:'400',fontFamily:'"Roboto", "Helvetica", "Arial", sans-serif',letterSpacing:'0.03333em',fontSize:'0.75rem', marginLeft:'4%',marginTop:'3px' }}>{formik.touched.state && formik.errors.state}</span>
       </FormControl>
       <br/>
       <br/>
@@ -192,6 +197,7 @@ const formik = useFormik({
           error={formik.touched.phonenumber && Boolean(formik.errors.phonenumber)}
           helperText={formik.touched.phonenumber && formik.errors.phonenumber}
        />
+        <span style={{textAlign:'start', color:'#f44336',fontWeight:'400',fontFamily:'"Roboto", "Helvetica", "Arial", sans-serif',letterSpacing:'0.03333em',fontSize:'0.75rem', marginLeft:'20%',marginTop:'3px' }}>{formik.touched.phonenumber && formik.errors.phonenumber}</span>
        </FormControl>
         <br/>
         <br/>
