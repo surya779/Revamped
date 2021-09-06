@@ -74,8 +74,10 @@ const Company = (props) => {
       <br/>
         {/*form */}
         <FormControl variant="outlined" >
+          <TextField>
         {/*fileupload component for image*/}
         <Fileupload/>
+        </TextField>
         </FormControl>
       </div>
       <br/>
