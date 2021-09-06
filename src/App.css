@@ -77,12 +77,12 @@ cursor: pointer;}
 
 .PhoneInputInput
 {
-  width: 27ch !important;
+  width: 24ch !important;
   height: 6ch !important;
 }
-.PhoneInput{
+/* .PhoneInput{
   width: 30ch !important;
-}
+} */
 .MuiOutlinedInput-input{
   width:34ch !important;
 }
