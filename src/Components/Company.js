@@ -69,9 +69,14 @@ const Company = (props) => {
   return (
     <div>
         
-      <div>
+      
       <h1>Add your company details</h1>
+      <div/>
       <br/>
+      
+      {/*form */}
+      <form onSubmit={formik.handleSubmit}>
+      <div>
         {/*form */}
         <FormControl variant="outlined" >
         {/*fileupload component for image*/}
@@ -81,8 +86,6 @@ const Company = (props) => {
       <br/>
       <br/>
 
-      {/*form */}
-      <form onSubmit={formik.handleSubmit}>
         {/*text field for company name */} 
         <TextField
         id="companyname"
